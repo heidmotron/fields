@@ -24,5 +24,21 @@ describe Fields do
         Fields.parse(data).should == ['c', {'d' => ['e', {'f'=> ['g', 'h'] }, {'i' => ['j']}, 'k']}, 'l']
       end
     end
+
+    describe 'with an invalid input' do
+      let(:bad_data) { [
+        'c,d,e=e',
+        '111,2222',
+        '(a,b,c)',
+        'c,d=(e,f=(g,h),i=(j),k),l=()'
+        ]
+      }
+
+      it 'should return nil' do
+        bad_data.each do |data|
+          Fields.parse(data).should be_nil
+        end
+      end
+    end
   end
 end

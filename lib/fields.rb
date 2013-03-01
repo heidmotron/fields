@@ -5,6 +5,7 @@ require 'fields/parser'
 module Fields
   def Fields.parse(input)
     parser = FieldsGrammarParser.new
-    parser.parse(input).value
+    result = parser.parse(input)
+    result ? result.value : result
   end
 end

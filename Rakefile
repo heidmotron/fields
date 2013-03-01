@@ -8,5 +8,5 @@ RSpec::Core::RakeTask.new 'spec'
 task :default => [:make_parser, :spec]
 
 task :make_parser do
-  `tt -o lib/fields/parser.rb fields.tt`
+  `tt -o lib/fields/parser.rb grammar/fields.tt`
 end
