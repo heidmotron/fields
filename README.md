@@ -2,7 +2,7 @@
 
 A parser for nested schema fields like:
 
-    'id,name,friends=(id,name,age,contact=(phone,email))'
+    'id,name,friends(id,name,age,contact(phone,email))'
 
 that turns the data definition into a ruby object like:
 

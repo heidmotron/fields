@@ -20,10 +20,10 @@ module Fields
     end
 
     rule collection
-      field '=' '(' fields ')' {
+      field '(' fields ')' {
         def value
           result = {}
-          result[elements[0].value] = elements[3].value
+          result[elements[0].value] = elements[2].value
           result
         end
       }

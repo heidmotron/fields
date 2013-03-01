@@ -113,7 +113,7 @@ module Fields
       end
 
       def fields
-        elements[3]
+        elements[2]
       end
 
     end
@@ -121,7 +121,7 @@ module Fields
     module Collection1
       def value
         result = {}
-        result[elements[0].value] = elements[3].value
+        result[elements[0].value] = elements[2].value
         result
       end
     end
@@ -141,36 +141,26 @@ module Fields
       r1 = _nt_field
       s0 << r1
       if r1
-        if has_terminal?('=', false, index)
+        if has_terminal?('(', false, index)
           r2 = instantiate_node(SyntaxNode,input, index...(index + 1))
           @index += 1
         else
-          terminal_parse_failure('=')
+          terminal_parse_failure('(')
           r2 = nil
         end
         s0 << r2
         if r2
-          if has_terminal?('(', false, index)
-            r3 = instantiate_node(SyntaxNode,input, index...(index + 1))
-            @index += 1
-          else
-            terminal_parse_failure('(')
-            r3 = nil
-          end
+          r3 = _nt_fields
           s0 << r3
           if r3
-            r4 = _nt_fields
-            s0 << r4
-            if r4
-              if has_terminal?(')', false, index)
-                r5 = instantiate_node(SyntaxNode,input, index...(index + 1))
-                @index += 1
-              else
-                terminal_parse_failure(')')
-                r5 = nil
-              end
-              s0 << r5
+            if has_terminal?(')', false, index)
+              r4 = instantiate_node(SyntaxNode,input, index...(index + 1))
+              @index += 1
+            else
+              terminal_parse_failure(')')
+              r4 = nil
             end
+            s0 << r4
           end
         end
       end

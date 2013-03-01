@@ -11,7 +11,7 @@ describe Fields do
     end
 
     describe 'when parsing a collection' do
-      let(:data) { 'a=(alpha,beta)' }
+      let(:data) { 'a(alpha,beta)' }
 
       it "should return an array of names" do
         Fields.parse(data).should == [{'a' => ['alpha', 'beta']}]
@@ -19,7 +19,7 @@ describe Fields do
     end
 
     describe 'when parsing a nested collection and names' do
-      let(:data) { 'c,d=(e,f=(g,h),i=(j),k),l' }
+      let(:data) { 'c,d(e,f(g,h),i(j),k),l' }
       it 'should return a nested array of hashes and names' do
         Fields.parse(data).should == ['c', {'d' => ['e', {'f'=> ['g', 'h'] }, {'i' => ['j']}, 'k']}, 'l']
       end
@@ -27,10 +27,10 @@ describe Fields do
 
     describe 'with an invalid input' do
       let(:bad_data) { [
-        'c,d,e=e',
+        'c,d,e=(e)',
         '111,2222',
         '(a,b,c)',
-        'c,d=(e,f=(g,h),i=(j),k),l=()'
+        'c,d()'
         ]
       }
 
