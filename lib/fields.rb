@@ -1,7 +1,5 @@
-require "fields/version"
-
 module Fields
-  def Fields.parse(input)
+  def self.parse(input)
     return nil if input.nil?
     return nil unless input =~ /^[a-z_,\(\)]+$/
 
@@ -21,7 +19,8 @@ module Fields
     build_tree(subtrees, working)
   end
 
-  def Fields.build_tree(subtrees, input)
+  private
+  def self.build_tree(subtrees, input)
     items = input.split(',')
     items.map do |item|
       if item.start_with?('$')

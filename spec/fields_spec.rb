@@ -33,6 +33,14 @@ describe Fields do
       end
     end
 
+    describe 'simple nesting' do
+      let(:data) { 'a(b(c(d(e))))' }
+
+      it 'should return an array of nested hashes' do
+        Fields.parse(data).should == [{'a' => [{'b' => [{'c' => [{'d' => ['e']}]} ] } ] }]
+      end
+    end
+
     describe 'with an invalid input' do
       let(:bad_data) { [
         'c,d,e=(e)',
