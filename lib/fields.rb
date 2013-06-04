@@ -1,12 +1,12 @@
 module Fields
   def self.parse(input)
     return nil if input.nil?
-    return nil unless input =~ /^[a-z_,\(\)]+$/
+    return nil unless input =~ /^[:a-z_,\(\)]+$/
 
     working = input.clone
     subtrees = []
     while working.index('(')
-      data = /([a-z_]+\([^\(\)]+\))/.match(working)
+      data = /([:a-z_]+\([^\(\)]+\))/.match(working)
       return nil if data.nil?
 
       data.captures.each do |substring|
@@ -15,7 +15,7 @@ module Fields
       end
     end
 
-    return nil unless working =~ /^[a-z0-9\$,_]+$/
+    return nil unless working =~ /^[:a-z0-9\$,_]+$/
     build_tree(subtrees, working)
   end
 

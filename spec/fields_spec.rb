@@ -3,18 +3,18 @@ require 'spec_helper'
 describe Fields do
   describe '#parse' do
     describe 'when parsing names only' do
-      let(:data) { 'alpha,beta,chi' }
+      let(:data) { ':alpha,beta,chi' }
 
       it "should return an array of names" do
-        Fields.parse(data).should == ['alpha', 'beta', 'chi']
+        Fields.parse(data).should == [':alpha', 'beta', 'chi']
       end
     end
 
     describe 'when parsing a collection' do
-      let(:data) { 'a(alpha,beta)' }
+      let(:data) { 'a(alpha,:beta)' }
 
       it "should return an array of names" do
-        Fields.parse(data).should == [{'a' => ['alpha', 'beta']}]
+        Fields.parse(data).should == [{'a' => ['alpha', ':beta']}]
       end
     end
 
