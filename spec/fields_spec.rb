@@ -11,6 +11,14 @@ describe Fields do
     end
 
     describe 'when parsing a collection' do
+      let(:data) { 'b,a(alpha,beta)' }
+
+      it "should return an array of names" do
+        Fields.parse(data).should == ['b', {'a' => ['alpha', 'beta']}]
+      end
+    end
+
+    describe 'when parsing a collection with symbols' do
       let(:data) { 'a(alpha,:beta)' }
 
       it "should return an array of names" do
